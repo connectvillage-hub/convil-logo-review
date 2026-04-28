@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>컨빌디자인 — 로고 시안 검토</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ivory: #F7F4EE;
+  --warm-white: #FDFBF8;
+  --charcoal: #2A2520;
+  --dark-brown: #1C1915;
+  --gold: #B8924A;
+  --gold-light: #D4AE72;
+  --gold-pale: #F0E4CC;
+  --text-main: #2A2520;
+  --text-muted: #7A6E62;
+  --text-light: #A89E92;
+  --border: #E0D8CC;
+  --border-strong: #C4B89A;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--warm-white);
+  color: var(--text-main);
+  line-height: 1.8;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--dark-brown);
+  padding: 72px 40px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(184,146,74,.04) 40px, rgba(184,146,74,.04) 41px);
+  pointer-events: none;
+}
+.header-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 18px; position: relative; }
+.header-title { font-family: 'Noto Serif KR', serif; font-size: clamp(26px,5vw,42px); font-weight: 300; line-height: 1.4; color: #F7F4EE; margin-bottom: 14px; position: relative; }
+.header-title em { font-style: normal; color: var(--gold-light); }
+.header-subtitle { font-size: 13px; color: rgba(247,244,238,.5); font-weight: 300; letter-spacing: .5px; position: relative; }
+.header-line { width: 40px; height: 1px; background: var(--gold); margin: 24px auto 0; position: relative; }
+
+/* ── WRAP ── */
+.wrap { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+
+/* ── STEP LABEL ── */
+.step-label {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 8px;
+}
+.step-label span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 400; white-space: nowrap; }
+.step-label::after { content: ''; flex: 1; height: .5px; background: var(--border); }
+
+.step-title { font-family: 'Noto Serif KR', serif; font-size: 22px; font-weight: 400; color: var(--charcoal); margin-bottom: 8px; }
+.step-desc { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.85; margin-bottom: 28px; }
+
+/* ── CONCEPT CARDS ── */
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.concept-card {
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  background: white;
+  transition: all .25s ease;
+  position: relative;
+  user-select: none;
+}
+.concept-card:hover { border-color: var(--gold-light); transform: translateY(-3px); }
+.concept-card.selected { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(184,146,74,.14); transform: translateY(-3px); }
+
+/* 체크 뱃지 */
+.concept-check {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: white;
+  opacity: 0;
+  transition: opacity .2s, transform .2s;
+  transform: scale(.6);
+  z-index: 2;
+}
+.concept-card.selected .concept-check { opacity: 1; transform: scale(1); }
+
+/* 이미지 영역 */
+.concept-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.concept-img img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  padding: 28px;
+}
+.concept-img .placeholder {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; width: 100%; height: 100%;
+  color: var(--text-light);
+}
+.concept-img .placeholder svg { opacity: .3; }
+.concept-img .placeholder span { font-size: 11px; letter-spacing: 1px; }
+
+/* 카드 하단 */
+.concept-footer {
+  padding: 14px 18px 18px;
+  border-top: .5px solid var(--border);
+}
+.concept-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; font-weight: 400; }
+.concept-name { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 500; color: var(--charcoal); margin-bottom: 3px; }
+.concept-sub { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.concept-card.selected .concept-name { color: #7A5A20; }
+
+/* ── SECTION DIVIDER ── */
+.sec-div { height: .5px; background: var(--border); margin: 48px 0; }
+
+/* ── SELECTED PREVIEW ── */
+.selected-bar {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 32px;
+}
+.selected-bar-thumb {
+  width: 56px; height: 56px;
+  border-radius: 8px;
+  background: white;
+  border: .5px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; overflow: hidden;
+}
+.selected-bar-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+.selected-bar-info { flex: 1; }
+.selected-bar-tag { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
+.selected-bar-name { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 500; color: #7A5A20; }
+
+/* ── INPUTS ── */
+.q-textarea {
+  width: 100%; min-height: 140px;
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px; color: var(--text-main);
+  background: white; resize: vertical; outline: none;
+  transition: border-color .2s; line-height: 1.75;
+}
+.q-textarea:focus { border-color: var(--gold); }
+.q-textarea::placeholder { color: var(--text-light); }
+
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+.q-input {
+  width: 100%; border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px; color: var(--text-main);
+  background: white; outline: none;
+  transition: border-color .2s;
+}
+.q-input:focus { border-color: var(--gold); }
+.q-input::placeholder { color: var(--text-light); }
+
+.err-msg { font-size: 12px; color: #B8714A; margin-top: 10px; display: none; }
+
+/* ── REVISION PANEL (hidden until card selected) ── */
+.revision-section { display: none; }
+.revision-section.visible { display: block; animation: fadeUp .3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── SUBMIT ── */
+.submit-wrap { text-align: center; padding-top: 48px; }
+.submit-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 52px;
+  background: var(--dark-brown); color: #F7F4EE;
+  border: none; border-radius: 36px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 1.5px; cursor: pointer;
+  transition: all .25s ease;
+}
+.submit-btn:hover { background: var(--gold); color: var(--dark-brown); }
+.submit-btn:active { transform: scale(.97); }
+.submit-btn:disabled { opacity: .6; cursor: not-allowed; }
+.submit-note { font-size: 12px; color: var(--text-light); margin-top: 14px; }
+
+.spinner {
+  display: none; width: 16px; height: 16px;
+  border: 2px solid rgba(247,244,238,.3);
+  border-top-color: #F7F4EE;
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SUCCESS SCREEN ── */
+.success-screen { display: none; max-width: 640px; margin: 0 auto; padding: 64px 32px 80px; text-align: center; }
+.success-icon {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: var(--gold-pale); border: 1.5px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 28px;
+}
+.success-title { font-family: 'Noto Serif KR', serif; font-size: 24px; font-weight: 400; color: var(--charcoal); margin-bottom: 12px; }
+.success-desc { font-size: 14px; color: var(--text-muted); line-height: 1.9; margin-bottom: 36px; }
+.success-summary { background: var(--ivory); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; text-align: left; }
+.sum-row { display: flex; gap: 16px; padding: 12px 0; border-bottom: .5px solid var(--border); font-size: 13.5px; }
+.sum-row:last-child { border-bottom: none; }
+.sum-label { color: var(--text-light); width: 80px; flex-shrink: 0; padding-top: 2px; }
+.sum-value { color: var(--charcoal); flex: 1; line-height: 1.7; }
+
+/* ── FOOTER ── */
+.footer { background: var(--dark-brown); padding: 44px 40px; text-align: center; }
+.footer-logo { font-family: 'Noto Serif KR', serif; font-size: 17px; font-weight: 400; color: #F7F4EE; letter-spacing: 2px; margin-bottom: 6px; }
+.footer-sub { font-size: 10px; letter-spacing: 3px; color: var(--gold-light); text-transform: uppercase; font-weight: 300; margin-bottom: 20px; }
+.footer-note { font-size: 12px; color: rgba(247,244,238,.35); font-weight: 300; line-height: 1.8; }
+
+@media (max-width: 640px) {
+  .header { padding: 52px 24px 44px; }
+  .wrap { padding: 36px 20px 60px; }
+  .concept-grid { grid-template-columns: 1fr; gap: 12px; }
+  .concept-img { aspect-ratio: 4 / 3; }
+  .input-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <p class="header-eyebrow">컨빌디자인 · Logo Review</p>
+  <h1 class="header-title">로고 <em>시안 검토</em></h1>
+  <p class="header-subtitle">마음에 드는 시안을 선택하고 수정 의견을 남겨주세요</p>
+  <div class="header-line"></div>
+</header>
+
+
+<!-- ══ 메인 콘텐츠 ══ -->
+<div id="mainSection">
+<div class="wrap">
+
+  <!-- STEP 1 : 시안 선택 -->
+  <div style="margin-bottom: 32px;">
+    <div class="step-label"><span>Step 01</span></div>
+    <h2 class="step-title">마음에 드는 시안을 선택해 주세요</h2>
+    <p class="step-desc">컨빌디자인이 제안한 3가지 로고 시안입니다.<br>카드를 클릭해 하나를 선택해 주시면, 해당 시안으로 수정 작업을 진행합니다.</p>
+  </div>
+
+  <div class="concept-grid">
+
+    <!-- 시안 A -->
+    <div class="concept-card" id="card-A" onclick="selectConcept('A')">
+      <div class="concept-check">✓</div>
+      <div class="concept-img">
+        <img id="img-A" src="" alt="시안 A"
+          onerror="this.style.display='none';document.getElementById('ph-A').style.display='flex';"
+          style="display:none;">
+        <div class="placeholder" id="ph-A">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <rect x="4" y="4" width="36" height="36" rx="5" stroke="#A89E92" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M13 32 L22 14 L31 32" stroke="#A89E92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 26 L28 26" stroke="#A89E92" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>시안 이미지</span>
+        </div>
+      </div>
+      <div class="concept-footer">
+        <p class="concept-tag">Concept A</p>
+        <p class="concept-name" id="name-A">시안 A</p>
+        <p class="concept-sub" id="sub-A">컨빌 디자인팀 제안 로고</p>
+      </div>
+    </div>
+
+    <!-- 시안 B -->
+    <div class="concept-card" id="card-B" onclick="selectConcept('B')">
+      <div class="concept-check">✓</div>
+      <div class="concept-img">
+        <img id="img-B" src="" alt="시안 B"
+          onerror="this.style.display='none';document.getElementById('ph-B').style.display='flex';"
+          style="display:none;">
+        <div class="placeholder" id="ph-B">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <rect x="4" y="4" width="36" height="36" rx="5" stroke="#A89E92" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M13 32 L22 14 L31 32" stroke="#A89E92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 26 L28 26" stroke="#A89E92" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>시안 이미지</span>
+        </div>
+      </div>
+      <div class="concept-footer">
+        <p class="concept-tag">Concept B</p>
+        <p class="concept-name" id="name-B">시안 B</p>
+        <p class="concept-sub" id="sub-B">컨빌 디자인팀 제안 로고</p>
+      </div>
+    </div>
+
+    <!-- 시안 C -->
+    <div class="concept-card" id="card-C" onclick="selectConcept('C')">
+      <div class="concept-check">✓</div>
+      <div class="concept-img">
+        <img id="img-C" src="" alt="시안 C"
+          onerror="this.style.display='none';document.getElementById('ph-C').style.display='flex';"
+          style="display:none;">
+        <div class="placeholder" id="ph-C">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <rect x="4" y="4" width="36" height="36" rx="5" stroke="#A89E92" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <path d="M13 32 L22 14 L31 32" stroke="#A89E92" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 26 L28 26" stroke="#A89E92" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>시안 이미지</span>
+        </div>
+      </div>
+      <div class="concept-footer">
+        <p class="concept-tag">Concept C</p>
+        <p class="concept-name" id="name-C">시안 C</p>
+        <p class="concept-sub" id="sub-C">컨빌 디자인팀 제안 로고</p>
+      </div>
+    </div>
+
+  </div><!-- /concept-grid -->
+
+  <p class="err-msg" id="conceptError">시안을 하나 선택해 주세요.</p>
+
+  <!-- STEP 2 + 3 : 선택 후 표시 -->
+  <div class="revision-section" id="revisionSection">
+
+    <div class="sec-div"></div>
+
+    <!-- 선택된 시안 확인 바 -->
+    <div class="step-label" style="margin-bottom:8px;"><span>Step 02</span></div>
+    <h2 class="step-title">선택하신 시안</h2>
+
+    <div class="selected-bar">
+      <div class="selected-bar-thumb">
+        <img id="bar-thumb" src="" alt="" style="display:none;">
+        <svg id="bar-icon" width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <rect x="3" y="3" width="22" height="22" rx="3" stroke="#C4B89A" stroke-width="1.2"/>
+          <path d="M8 20 L14 10 L20 20" stroke="#C4B89A" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="selected-bar-info">
+        <p class="selected-bar-tag" id="bar-tag">선택된 시안</p>
+        <p class="selected-bar-name" id="bar-name">—</p>
+      </div>
+    </div>
+
+    <div class="sec-div" style="margin: 36px 0;"></div>
+
+    <!-- 수정사항 -->
+    <div class="step-label" style="margin-bottom:8px;"><span>Step 03</span></div>
+    <h2 class="step-title">수정사항을 작성해 주세요</h2>
+    <p class="step-desc">
+      선택하신 시안에서 변경하고 싶은 부분을 구체적으로 적어주세요.<br>
+      수정이 없으시다면 <strong style="color:var(--gold);font-weight:500;">"수정 없음"</strong>이라고 작성해 주세요.
+    </p>
+
+    <textarea class="q-textarea" id="revisionText"
+      placeholder="예)
+· 글씨체를 좀 더 두껍게 해주세요
+· 십자가 크기를 조금 더 크게 조정 부탁드립니다
+· 색상을 좀 더 밝고 따뜻한 느낌으로 변경해주세요
+· 전체적으로 마음에 들어 수정 없음"></textarea>
+    <p class="err-msg" id="revisionError">수정사항을 입력해 주세요. 없으시면 "수정 없음"으로 작성해 주세요.</p>
+
+    <!-- 제출자 정보 -->
+    <div style="margin-top: 36px; padding: 24px 24px; background: var(--ivory); border: .5px solid var(--border); border-radius: 10px;">
+      <p style="font-size: 13px; color: var(--text-muted); font-weight: 300; margin-bottom: 14px;">확인을 위해 교회명과 담당자 연락처를 입력해 주세요.</p>
+      <div class="input-row" style="margin-top:0;">
+        <input class="q-input" id="churchName" type="text" placeholder="교회 이름">
+        <input class="q-input" id="contactInfo" type="text" placeholder="담당자 이름 · 연락처">
+      </div>
+      <p class="err-msg" id="infoError">교회명과 담당자 연락처를 입력해 주세요.</p>
+    </div>
+
+    <!-- 제출 버튼 -->
+    <div class="submit-wrap">
+      <button class="submit-btn" id="submitBtn" onclick="submitReview()">
+        <div class="spinner" id="spinner"></div>
+        <span id="submitText">검토 의견 제출하기 →</span>
+      </button>
+      <p class="submit-note">제출 후 컨빌디자인 팀이 수정 작업을 진행합니다.</p>
+    </div>
+
+  </div><!-- /revisionSection -->
+
+</div><!-- /wrap -->
+</div><!-- /mainSection -->
+
+
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">✓</div>
+  <h2 class="success-title">검토 의견이 전달되었습니다</h2>
+  <p class="success-desc">
+    선택하신 시안과 수정 의견을 바탕으로<br>
+    컨빌디자인 팀이 수정 작업을 진행합니다.<br>
+    <strong style="color:var(--gold);font-weight:500;">완성 결과물은 별도로 안내드리겠습니다.</strong>
+  </p>
+  <div class="success-summary" id="successSummary"></div>
+  <div style="margin-top:32px;">
+    <a href="https://convill-homepage-ver2.vercel.app/" target="_blank"
+      style="display:inline-block;padding:12px 32px;border:1px solid var(--gold);border-radius:30px;color:var(--gold);font-size:13px;text-decoration:none;letter-spacing:1px;">
+      컨빌디자인 홈페이지 →
+    </a>
+  </div>
+</div>
+
+
+<footer class="footer">
+  <p class="footer-logo">컨빌디자인</p>
+  <p class="footer-sub">Church Interior Studio</p>
+  <p class="footer-note">성도가 머물고 싶은 공간, 청년이 찾아오는 교회<br>10년간 350개 공간을 디자인한 컨빌이 교회의 브랜드를 함께 만들어갑니다.</p>
+</footer>
+
+
+<script>
+/* ══════════════════════════════════════
+   ★ 설정 영역 — 여기만 수정하세요
+══════════════════════════════════════ */
+
+/* 1) Google Apps Script URL */
+var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+/* 2) 시안 정보 — img에 이미지 URL, name에 시안명, sub에 한줄 설명 */
+var CONCEPTS = {
+  A: {
+    img:  '',           /* 예) 'https://drive.google.com/uc?id=파일ID' */
+    name: '시안 A',
+    sub:  '컨빌 디자인팀 제안 로고'
+  },
+  B: {
+    img:  '',
+    name: '시안 B',
+    sub:  '컨빌 디자인팀 제안 로고'
+  },
+  C: {
+    img:  '',
+    name: '시안 C',
+    sub:  '컨빌 디자인팀 제안 로고'
+  }
+};
+
+/* ══════════════════════════════════════
+   초기화 — 이미지 & 텍스트 세팅
+══════════════════════════════════════ */
+(function init() {
+  ['A','B','C'].forEach(function(k) {
+    var c = CONCEPTS[k];
+    document.getElementById('name-' + k).textContent = c.name;
+    document.getElementById('sub-'  + k).textContent = c.sub;
+    if (c.img) {
+      var el = document.getElementById('img-' + k);
+      el.src = c.img;
+      el.style.display = 'block';
+      document.getElementById('ph-' + k).style.display = 'none';
+    }
+  });
+})();
+
+/* ══════════════════════════════════════
+   시안 선택
+══════════════════════════════════════ */
+var selectedKey = null;
+
+function selectConcept(key) {
+  selectedKey = key;
+
+  ['A','B','C'].forEach(function(k) {
+    document.getElementById('card-' + k).classList.toggle('selected', k === key);
+  });
+  document.getElementById('conceptError').style.display = 'none';
+
+  /* 선택 바 업데이트 */
+  var c = CONCEPTS[key];
+  document.getElementById('bar-tag').textContent  = 'Concept ' + key + ' 선택됨';
+  document.getElementById('bar-name').textContent = c.name;
+
+  if (c.img) {
+    document.getElementById('bar-thumb').src = c.img;
+    document.getElementById('bar-thumb').style.display = 'block';
+    document.getElementById('bar-icon').style.display  = 'none';
+  } else {
+    document.getElementById('bar-thumb').style.display = 'none';
+    document.getElementById('bar-icon').style.display  = 'block';
+  }
+
+  /* 수정 패널 표시 */
+  var panel = document.getElementById('revisionSection');
+  panel.classList.add('visible');
+
+  setTimeout(function() {
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 80);
+}
+
+/* ══════════════════════════════════════
+   제출
+══════════════════════════════════════ */
+function submitReview() {
+  var valid = true;
+
+  if (!selectedKey) {
+    document.getElementById('conceptError').style.display = 'block';
+    document.getElementById('card-A').scrollIntoView({ behavior:'smooth', block:'center' });
+    valid = false;
+  }
+
+  var revision = document.getElementById('revisionText').value.trim();
+  if (!revision) {
+    document.getElementById('revisionError').style.display = 'block';
+    if (valid) document.getElementById('revisionText').scrollIntoView({ behavior:'smooth', block:'center' });
+    valid = false;
+  }
+
+  var churchName  = document.getElementById('churchName').value.trim();
+  var contactInfo = document.getElementById('contactInfo').value.trim();
+  if (!churchName || !contactInfo) {
+    document.getElementById('infoError').style.display = 'block';
+    if (valid) document.getElementById('churchName').scrollIntoView({ behavior:'smooth', block:'center' });
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  /* 로딩 */
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('submitText').textContent = '제출 중...';
+
+  var now = new Date();
+  var payload = {
+    type:            '시안검토',
+    timestamp:       now.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+    churchName:      churchName,
+    contactInfo:     contactInfo,
+    selectedConcept: 'Concept ' + selectedKey + ' — ' + CONCEPTS[selectedKey].name,
+    revision:        revision
+  };
+
+  var send = APPS_SCRIPT_URL !== 'YOUR_APPS_SCRIPT_URL_HERE'
+    ? fetch(APPS_SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+    : Promise.resolve();
+
+  send
+    .then(function() { showSuccess(payload); })
+    .catch(function() { showSuccess(payload); });
+}
+
+function showSuccess(p) {
+  document.getElementById('successSummary').innerHTML =
+    row('교회명',   p.churchName) +
+    row('담당자',   p.contactInfo) +
+    row('선택 시안', p.selectedConcept) +
+    row('수정사항', p.revision);
+
+  document.getElementById('mainSection').style.display = 'none';
+  document.getElementById('successScreen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function row(label, value) {
+  return '<div class="sum-row"><span class="sum-label">' + label + '</span><span class="sum-value">' + (value || '—') + '</span></div>';
+}
+</script>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📋 구글 시트 연결 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+【시트 헤더】 (1행에 입력)
+  A: 제출시간  B: 교회명  C: 담당자  D: 선택시안  E: 수정사항
+
+【Apps Script 코드】
+  function doPost(e) {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data  = JSON.parse(e.postData.contents);
+    sheet.appendRow([
+      data.timestamp, data.churchName, data.contactInfo,
+      data.selectedConcept, data.revision
+    ]);
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+【배포 방법】
+  Apps Script → 배포 → 새 배포 → 웹 앱
+  실행 계정: 나 / 액세스: 모든 사용자
+  → URL 복사 → APPS_SCRIPT_URL 변수에 붙여넣기
+
+【시안 이미지 등록】
+  CONCEPTS 객체의 img: '' 에 이미지 URL 입력
+  구글 드라이브 사용 시: 파일 공유 → '링크가 있는 모든 사용자'로 설정 후
+  → https://drive.google.com/uc?id=파일ID 형식으로 사용
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+
+</body>
+</html>
